@@ -18,8 +18,10 @@ struct Data{
     {}
 };
 
-int capacity = 1'000'000;
-float erase_probability = 90;
+int capacity = 100'000;
+float erase_probability = 25;
+
+const unsigned int iterate_times = 10;
 
 void benchmark_colony(){
     plf::colony<Data> list;
@@ -44,10 +46,10 @@ void benchmark_colony(){
 
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
         long long sum = 0;
-		//int size = 0;
-        for(const Data& data: list){
+
+		for (int i = 0; i<iterate_times; i++)
+        for (const Data& data: list){
             sum += data.sum;
-			//size++;
         }
     high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
@@ -69,7 +71,8 @@ void benchmark_vector(){
 
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
         long long sum = 0;
-        for(const Data& data: list){
+		for (int i = 0; i<iterate_times;i++)
+        for (const Data& data: list){
             sum += data.sum;
         }
     high_resolution_clock::time_point t2 = high_resolution_clock::now();
